@@ -1,0 +1,348 @@
+
+
+
+
+
+
+
+ 
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+
+
+
+
+
+
+
+ 
+
+
+
+
+
+<meta charset="UTF-8">
+<title>上海市闵行区教育学院</title>
+<link rel="apple-touch-icon-precomposed" sizes="32x32" href="https://jyxyfiles.mhedu.sh.cn/ftpfiles/dcpfiles/mainpicture/ico_jyxy.ico">
+<link rel="shortcut icon" href="https://jyxyfiles.mhedu.sh.cn/ftpfiles/dcpfiles/mainpicture/ico_jyxy.ico">
+<script src="https://jyxy.mhedu.sh.cn/static/vue/jquery-3.6.0.min.js"></script><script type="text/javascript" src="https://jyxy.mhedu.sh.cn/static/vue/jquery-migrate.min.js"></script>
+<script src="https://jyxy.mhedu.sh.cn/static/js/jquery.SuperSlide.js?V1.0"></script>
+<script src="https://jyxy.mhedu.sh.cn/static/js/layer/layer.js"></script>
+<script src="https://jyxy.mhedu.sh.cn/static/js/idealdcp/utils/Utils.js"></script>
+<script type="text/javascript" src="https://jyxy.mhedu.sh.cn/static/js/ueditor/ueditor.parse.js"></script>
+<script type="text/javascript" src="https://jyxy.mhedu.sh.cn/static/js/jquery-qrcode-master/jquery.qrcode.min.js"></script>
+
+
+<link rel="stylesheet" type="text/css" href="https://jyxy.mhedu.sh.cn/static/extranet/mhedu/index/css/style.css">
+<style type="text/css">
+	.tit{
+		padding: 5px 0px;
+	    font-size: 14px;
+	    text-indent: 30px;
+	}
+</style>
+</head>
+<body>
+	
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+<style type="text/css">
+#qrcodediv img{
+    margin: 30px auto;
+}
+</style>   
+
+<div id="header">
+	<div id="topbar">
+		<div class="topbarcon cl" style="">
+			<div class="topsearch"><input id="searchDiv" type="text" placeholder="输入关键字搜索..." class="stxt"><input type="button" value="搜索" class="sbtn"></div>
+			<div class="toprlink">
+				<span class="locat">上海市闵行区紫龙路835号</span>
+				<a href="javascript:;" class="loginlink" id="wxqrcodebtn">移动版</a>
+                <a href="https://jyxy.mhedu.sh.cn/extranet/web/index/index!login.action" target="_blank" class="loginlink">用户登录</a>
+			</div>
+		</div>
+	</div>
+	<div id="top" class="cl">
+        <div id="logo" style="width:235px;"><img src="https://jyxy.mhedu.sh.cn/static/extranet/mhedu/index/images/logo.png" height="66" width="193" alt="">
+        </div>
+		<ul class="menu">
+			<li class="home current"><a target="_blank" href="https://jyxy.mhedu.sh.cn/extranet/web/index/index.action"  >首页</a></li>
+			<li><a target="_blank" class="morelist" code="JYXY_XXGK" href="https://jyxy.mhedu.sh.cn/extranet/web/mhedu/xx.action" >信息公开</a></li>
+			<li><a target="_blank" class="morelist" code="JYXY_DWGK" href="https://jyxy.mhedu.sh.cn/extranet/web/mhedu/dw.action" >党务公开</a></li>
+			<li><a target="_blank" class="morelist" code="JYXY_HXXY" href="https://jyxy.mhedu.sh.cn/extranet/web/mhedu/hx.action" >文明单位</a></li>
+			<li><a target="_blank" class="morelist" code="JYXY_ZHJY" href="https://jyxy.mhedu.sh.cn/extranet/web/mhedu/zh.action" >智慧教育</a></li>
+            
+			<li><a target="_blank" class="morelist" code="JYXY_SY_XYDT" >学院动态</a></li>
+			<li><a target="_blank" class="morelist" code="JYXY_SY_ZHYJ">综合研究</a></li>
+            <li><a target="_blank" class="morelist" code="JYXY_SY_YXDT">教研动态</a></li>
+            <li><a target="_blank" class="morelist" code="JYXY_SY_JSPX">教师培训</a></li>
+            <li><a target="_blank" class="morelist" code="JYXY_SY_GBPX">干部培训</a></li>
+			<li><a target="_blank" class="morelist" code="JYXY_SY_DYYJ">德育研究</a></li>
+			<li><a target="_blank" class="morelist" code="JYXY_XLJK"
+                   href="https://jyxy.mhedu.sh.cn/extranet/web/mhedu/xl.action">心理健康</a></li>
+            <li><a target="_blank" class="morelist" code="JYXY_SY_ZHYJ_JYKY">教育科研</a></li>
+			<li><a target="_blank" class="morelist" code="JYXY_SY_JYJS">教育技术</a></li>
+		</ul>
+	</div>
+</div>
+
+<script>
+	var codes=[];
+	$(".morelist").each(function(){
+		codes.push($(this).attr("code"));
+	});
+	$(".morelist").click(function(){
+        if(!this.href)
+        window.open('/extranet/web/index/index!more.action?catalogCode='+$(this).attr("code"));
+	});
+	$(".sbtn").click(function(){
+        Utils.formBuilder.submitByForm({search:$('#searchDiv').val()}, '/extranet/web/index/index!search.action');
+    });
+
+	$.ajax({
+		url:"/extranet/web/index/index!codes.action",
+		type:'post',
+		data:{codes:codes.join(",")},
+		success:function(data){
+			$(".morelist").each(function(){
+				if(''.indexOf(data.data[$(this).attr("code")])>-1){
+					$("#top .current").removeClass("current");
+					$(this).parent().addClass("current");
+				}
+			});
+
+		},
+		error:function(){
+
+		}
+	});
+</script>
+
+	<div id="combox">
+		<div class="comcon cl">
+			<div class="noticebox">
+				<div class="location">
+					<a href="https://jyxy.mhedu.sh.cn/extranet/web/index/index!list.action" class="home"></a> <em>&gt;</em> <a href="https://jyxy.mhedu.sh.cn/extranet/web/index/index!edunotice.action">通知</a> <em>&gt;</em> 学科教研
+				</div>
+				<div class="article">
+					<h1>2022学年第二学期闵行区小学音乐第15周教研活动通知</h1>
+					<div class="artinfo">
+						活动时间: 2023-05-25 13:00<br>
+					</div>
+					<div class="artcon" style="padding:5px 30px;font-size: 13px;color: #7c7676;">
+						<span></span>
+					</div>
+					<p class="tit">对象：小学</p>
+					<p class="tit">地点：闵行区七宝镇明强小学  新镇路1050号  二楼远程教室</p>
+					<p class="tit">年级：小学</p>
+					<p class="tit">学科：音乐</p>
+					<p class="tit">内容：</p>
+					<div class="artcon">
+						<p style="text-align:center;line-height:29px"><strong><span style=";font-family:黑体;font-size:19px">闵行区音乐学科</span></strong><strong><span style=";font-family:黑体;font-size:19px">教学研讨</span></strong><strong><span style=";font-family:黑体;font-size:19px">活动</span></strong><strong><span style=";font-family:黑体;font-size:19px">之一</span></strong></p><p style="margin-left:120px;line-height:29px"><strong><span style=";font-family:等线;font-size:16px"><span style="font-family:等线">【研讨主题】</span> &nbsp;</span></strong><strong><span style=";font-family:宋体;font-size:16px"><span style="font-family:宋体">《聚焦核心素养内涵</span> &nbsp;&nbsp;<span style="font-family:宋体">促进音乐文化理解》</span></span></strong></p><p style="line-height:29px"><strong><span style=";font-family:等线;font-size:16px">【</span></strong><strong><span style=";font-family:等线;font-size:16px">主办单位</span></strong><strong><span style=";font-family:等线;font-size:16px"><span style="font-family:等线">】</span> </span></strong><strong><span style=";font-family:宋体;font-size:16px">&nbsp;</span></strong><span style=";font-family:仿宋_GB2312;font-size:16px">闵行区教育学院</span><span style=";font-family:仿宋_GB2312;font-size:16px">教研中心</span></p><p style="line-height:29px"><strong><span style=";font-family:等线;font-size:16px"><span style="font-family:等线">【承办单位】</span> &nbsp;</span></strong><span style=";font-family:仿宋_GB2312;font-size:16px">闵行区七宝镇明强小学</span></p><p style="line-height:29px"><strong><span style=";font-family:等线;font-size:16px"><span style="font-family:等线">【活动时间】</span> &nbsp;</span></strong><span style=";font-family:仿宋_GB2312;font-size:16px">20</span><span style=";font-family:仿宋_GB2312;font-size:16px">23</span><span style=";font-family:仿宋_GB2312;font-size:16px">年</span><span style=";font-family:仿宋_GB2312;font-size:16px">5</span><span style=";font-family:仿宋_GB2312;font-size:16px">月</span><span style=";font-family:仿宋_GB2312;font-size:16px">25</span><span style=";font-family:仿宋_GB2312;font-size:16px"><span style="font-family:仿宋_GB2312">日（周四）下午</span><span style="font-family:仿宋_GB2312">1</span></span><span style=";font-family:仿宋_GB2312;font-size:16px">3</span><span style=";font-family:仿宋_GB2312;font-size:16px">:</span><span style=";font-family:仿宋_GB2312;font-size:16px">0</span><span style=";font-family:仿宋_GB2312;font-size:16px">0——1</span><span style=";font-family:仿宋_GB2312;font-size:16px">5</span><span style=";font-family:仿宋_GB2312;font-size:16px">：</span><span style=";font-family:仿宋_GB2312;font-size:16px">3</span><span style=";font-family:仿宋_GB2312;font-size:16px">0</span></p><p style="line-height:29px"><strong><span style=";font-family:等线;font-size:16px">【活动地点】</span></strong><span style=";font-family:等线;font-size:16px">&nbsp;&nbsp;</span><span style=";font-family:仿宋_GB2312;font-size:16px"><span style="font-family:仿宋_GB2312">闵行区七宝镇明强小学</span> </span><span style=";font-family:仿宋_GB2312;font-size:16px">&nbsp;</span><span style=";font-family:仿宋_GB2312;font-size:16px"><span style="font-family:仿宋_GB2312">新镇路</span><span style="font-family:仿宋_GB2312">1050号 </span></span><span style=";font-family:仿宋_GB2312;font-size:16px">&nbsp;</span><span style=";font-family:仿宋_GB2312;font-size:16px">二楼</span><span style=";font-family:仿宋_GB2312;font-size:16px">远程</span><span style=";font-family:仿宋_GB2312;font-size:16px">教室</span></p><p style="line-height:29px"><strong><span style=";font-family:等线;font-size:16px"><span style="font-family:等线">【主</span> <span style="font-family:等线">持</span> <span style="font-family:等线">人】</span> &nbsp;</span></strong><span style=";font-family:仿宋_GB2312;font-size:16px">闵行区音乐学科</span><span style=";font-family:仿宋_GB2312;font-size:16px">中心组北片组长</span><span style=";font-family:仿宋_GB2312;font-size:16px">&nbsp;&nbsp;&nbsp;<span style="font-family:仿宋_GB2312">郭</span></span><span style=";font-family:仿宋_GB2312;font-size:16px">敬苓</span><span style=";font-family:仿宋_GB2312;font-size:16px">&nbsp;<span style="font-family:仿宋_GB2312">陆静华</span></span></p><p style="line-height:29px"><strong><span style=";font-family:等线;font-size:16px">【参加人员】</span></strong><span style=";font-family:仿宋_GB2312;font-size:16px">&nbsp;&nbsp;<span style="font-family:仿宋_GB2312">闵行区小学音乐教师</span></span><span style=";font-family:仿宋_GB2312;font-size:16px">&nbsp;&nbsp;</span><span style=";font-family:仿宋_GB2312;font-size:16px">&nbsp;<span style="font-family:仿宋_GB2312">松江区九亭第五小学</span></span><span style=";font-family:仿宋_GB2312;font-size:16px">音乐教师</span></p><p style="line-height:29px"><strong><span style=";font-family:等线;font-size:16px">【活动流程】</span></strong></p><p style="line-height:29px"><strong><span style="font-family: 仿宋_GB2312;font-size: 16px">1</span></strong><strong><span style="font-family: 仿宋_GB2312;font-size: 16px"><span style="font-family:仿宋_GB2312">、主旨解析：</span> </span></strong><span style=";font-family:仿宋_GB2312;font-size:16px"><span style="font-family:仿宋_GB2312">闵行区七宝镇明强小学</span> &nbsp;</span><span style=";font-family:仿宋_GB2312;font-size:16px">&nbsp;&nbsp;</span><span style=";font-family:仿宋_GB2312;font-size:16px">陆静华</span></p><p style="line-height:29px"><strong><span style="font-family: 仿宋;font-size: 16px">2</span></strong><strong><span style="font-family: 仿宋;font-size: 16px">、课堂</span></strong><strong><span style=";font-family:仿宋;font-size:16px">教学：</span></strong></p><p style="line-height:29px"><span style=";font-family:仿宋_GB2312;font-size:16px"><span style="font-family:仿宋_GB2312">（</span><span style="font-family:仿宋_GB2312">1）沪教版一年级第二学期</span></span><span style=";font-family:仿宋_GB2312;font-size:16px">&nbsp;&nbsp;</span><span style=";font-family:仿宋_GB2312;font-size:16px">教学内容</span><span style=";font-family:仿宋_GB2312;font-size:16px">：</span><span style=";font-family:仿宋_GB2312;font-size:16px">《玩具兵进行曲》执教教师</span><span style=";font-family:仿宋_GB2312;font-size:16px">：</span><span style=";font-family:仿宋_GB2312;font-size:16px">吴思成</span></p><p style="line-height:29px"><span style=";font-family:仿宋_GB2312;font-size:16px"><span style="font-family:仿宋_GB2312">（</span><span style="font-family:仿宋_GB2312">2）沪教版四年级第二学期</span></span><span style=";font-family:仿宋_GB2312;font-size:16px">&nbsp;&nbsp;</span><span style=";font-family:仿宋_GB2312;font-size:16px">教学内容</span><span style=";font-family:仿宋_GB2312;font-size:16px">：</span><span style=";font-family:仿宋_GB2312;font-size:16px"><span style="font-family:仿宋_GB2312">《采茶舞曲》</span> <span style="font-family:仿宋_GB2312">执教教师</span></span><span style=";font-family:仿宋_GB2312;font-size:16px">：</span><span style=";font-family:仿宋_GB2312;font-size:16px">王晋妮</span></p><p style="line-height:29px"><strong><span style="font-family: 仿宋_GB2312;font-size: 16px">3</span></strong><strong><span style="font-family: 仿宋_GB2312;font-size: 16px">、上课教师说课</span></strong><strong><span style="font-family: 仿宋_GB2312;font-size: 16px">、</span></strong><strong><span style="font-family: 仿宋_GB2312;font-size: 16px">现场听课教师评课</span></strong></p><p style="line-height:29px"><strong><span style="font-family: 仿宋_GB2312;font-size: 16px">&nbsp;</span></strong></p><p style="text-align:center;line-height:29px"><strong><span style=";font-family:黑体;font-size:19px">闵行区音乐学科</span></strong><strong><span style=";font-family:黑体;font-size:19px">教学研讨</span></strong><strong><span style=";font-family:黑体;font-size:19px">活动</span></strong><strong><span style=";font-family:黑体;font-size:19px">之二</span></strong></p><p style="line-height:29px"><strong><span style=";font-family:等线;font-size:16px">【</span></strong><strong><span style=";font-family:等线;font-size:16px">专题培训</span></strong><strong><span style=";font-family:等线;font-size:16px"><span style="font-family:等线">】</span> </span></strong><strong><span style=";font-family:宋体;font-size:16px">《</span></strong><strong><span style="font-family: 仿宋_GB2312;font-size: 19px">中小学合唱比赛的评分原则与实施</span></strong><strong><span style="font-family: 仿宋_GB2312;font-size: 19px">策略</span></strong><strong><span style=";font-family:宋体;font-size:16px">》</span></strong></p><p style="line-height:29px"><strong><span style=";font-family:等线;font-size:16px">【</span></strong><strong><span style=";font-family:等线;font-size:16px">培训专家</span></strong><strong><span style=";font-family:等线;font-size:16px"><span style="font-family:等线">】</span> </span></strong><strong><span style=";font-family:宋体;font-size:16px">&nbsp;</span></strong><span style=";font-family:仿宋_GB2312;font-size:16px"><span style="font-family:仿宋_GB2312">上海音乐学院音教系副主任，合唱指挥专家</span> <span style="font-family:仿宋_GB2312">王海灵</span></span></p><p style="line-height:29px"><strong><span style=";font-family:等线;font-size:16px">【</span></strong><strong><span style=";font-family:等线;font-size:16px">主办单位</span></strong><strong><span style=";font-family:等线;font-size:16px"><span style="font-family:等线">】</span> </span></strong><strong><span style=";font-family:宋体;font-size:16px">&nbsp;</span></strong><span style=";font-family:仿宋_GB2312;font-size:16px">闵行区教育学院</span><span style=";font-family:仿宋_GB2312;font-size:16px">教研中心</span></p><p style="line-height:29px"><strong><span style=";font-family:等线;font-size:16px"><span style="font-family:等线">【承办单位】</span> &nbsp;</span></strong><span style=";font-family:仿宋_GB2312;font-size:16px">闵行区七宝镇明强小学</span></p><p style="line-height:29px"><strong><span style=";font-family:等线;font-size:16px"><span style="font-family:等线">【活动时间】</span> &nbsp;</span></strong><span style=";font-family:仿宋_GB2312;font-size:16px">20</span><span style=";font-family:仿宋_GB2312;font-size:16px">23</span><span style=";font-family:仿宋_GB2312;font-size:16px">年</span><span style=";font-family:仿宋_GB2312;font-size:16px">5</span><span style=";font-family:仿宋_GB2312;font-size:16px">月</span><span style=";font-family:仿宋_GB2312;font-size:16px">25</span><span style=";font-family:仿宋_GB2312;font-size:16px"><span style="font-family:仿宋_GB2312">日（周四）下午</span><span style="font-family:仿宋_GB2312">1</span></span><span style=";font-family:仿宋_GB2312;font-size:16px">5</span><span style=";font-family:仿宋_GB2312;font-size:16px">:</span><span style=";font-family:仿宋_GB2312;font-size:16px">45</span><span style=";font-family:仿宋_GB2312;font-size:16px">——1</span><span style=";font-family:仿宋_GB2312;font-size:16px">7</span><span style=";font-family:仿宋_GB2312;font-size:16px">：</span><span style=";font-family:仿宋_GB2312;font-size:16px">3</span><span style=";font-family:仿宋_GB2312;font-size:16px">0</span></p><p style="line-height:29px"><strong><span style=";font-family:等线;font-size:16px">【活动地点】</span></strong><span style=";font-family:等线;font-size:16px">&nbsp;&nbsp;</span><span style=";font-family:仿宋_GB2312;font-size:16px"><span style="font-family:仿宋_GB2312">闵行区七宝镇明强小学</span> </span><span style=";font-family:仿宋_GB2312;font-size:16px">&nbsp;</span><span style=";font-family:仿宋_GB2312;font-size:16px"><span style="font-family:仿宋_GB2312">新镇路</span><span style="font-family:仿宋_GB2312">1050号 </span></span><span style=";font-family:仿宋_GB2312;font-size:16px">&nbsp;</span><span style=";font-family:仿宋_GB2312;font-size:16px">二楼</span><span style=";font-family:仿宋_GB2312;font-size:16px">远程</span><span style=";font-family:仿宋_GB2312;font-size:16px">教室</span></p><p style="line-height:29px"><strong><span style=";font-family:等线;font-size:16px"><span style="font-family:等线">【主</span> <span style="font-family:等线">持</span> <span style="font-family:等线">人】</span> &nbsp;</span></strong><span style=";font-family:仿宋_GB2312;font-size:16px"><span style="font-family:仿宋_GB2312">闵行区教育学院小学音乐学科教研员</span> <span style="font-family:仿宋_GB2312">刘庆江</span></span></p><p style="line-height:29px"><strong><span style=";font-family:等线;font-size:16px">【参加人员】</span></strong><span style=";font-family:仿宋_GB2312;font-size:16px">&nbsp;&nbsp;<span style="font-family:仿宋_GB2312">闵行区小学音乐</span></span><span style=";font-family:仿宋_GB2312;font-size:16px">各校学生合唱队指挥、伴奏</span><span style=";font-family:仿宋_GB2312;font-size:16px"><span style="font-family:仿宋_GB2312">教师</span> &nbsp;&nbsp;&nbsp;</span></p><p style="line-height:29px"><strong><span style="font-family: 仿宋_GB2312;font-size: 16px">&nbsp;</span></strong></p><p style="line-height:29px"><br></p><p><br></p>
+					</div>
+					<p class="tit" >出席与附言：附言：学校当天活动多，车位有限，尽量绿色出行，如果学校停不下，请停学校北面富强街临时车位上。附图。<p>
+                    
+                    <p class="tit" >备注：1、本次活动分为两个阶段：第一阶段学科教研13：15——15：30，所有小学音乐教师参加。
+2、第二阶段为合唱指挥培训：15：45——17：30，小学所有学校学生合唱团指挥和伴奏（自愿参加学习教师不限）教师参加。</p>
+                    
+					
+						<div class="filebox" style="padding-top:15px;">
+							<h6>附件：（点击下载）</h6>
+							
+								<p><a href="https://jyxyfiles.mhedu.sh.cn/ftpfiles/dcpfiles/8a9c1a005cce76e5015cd2e970790651/app/XYTZ/allArea/main/2023/05/8a9c1a006116662901611c6f8787077c/8ee5d9d6f4324470a883c7d9f9a5f1f1.png?title=%E6%98%8E%E5%BC%BA%E5%B0%8F%E5%AD%A6%E4%B8%9C%E6%A0%A1%E9%99%84%E8%BF%91%E7%9A%84%E5%81%9C%E8%BD%A6%E5%9C%BA%E6%88%AA%E5%9B%BE.png" download="明强小学东校附近的停车场截图.png">1、<span style="color: #359bd7;">明强小学东校附近的停车场截图.png</span></a></p>
+							
+							
+						</div>
+					
+					
+					<div class="artpre" style="padding-top:15px;">
+						<span class="goback"><a href="javascript:history.back(-1);">返回列表</a></span>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+<div id="footer">
+	<div class="ft cl">
+		<div  class="blogo">
+            <span id="_ideConac" class="" style="margin-top: 5px;">
+            <a href="http://bszs.conac.cn/sitename?method=show&amp;id=2907016072AE5269E053012819ACF339" target="_blank">
+                <img id="imgConac" vspace="0" hspace="0" border="0" src="https://jyxyfiles.mhedu.sh.cn/ftpfiles/dcpfiles/image/blue.png"
+                     data-bd-imgshare-binded="1">
+            </a>
+        </span>
+        </div>
+        <div  class="blogo">
+            <div style="padding: 3px;background-color: white;width: 56px;margin: auto;">
+                <span class="" id="footerwxqrcodebtn" ></span>
+            </div>
+            <span>移动版二维码</span>
+        </div>
+        <div  class="blogo">
+            <div class="" id="qyFrcode" style="margin-right:10px;display: block;">
+                <img src="https://jyxyfiles.mhedu.sh.cn/ftpfiles/dcpfiles/introduction/2205021687154906a1763079ccc40a84.jpg" style="width: 61px;height: 62px;">
+            </div>
+            <span>闵行区教育学院服务号</span>
+        </div>
+
+        <div class="bnav">
+            <a href="https://jyxy.mhedu.sh.cn/extranet/web/mhedu/xx!oriented.action?catalogCode=JYXY_XXGK_LXWM">联系我们</a>
+            |
+            <a href="https://jyxy.mhedu.sh.cn/extranet/web/mhedu/xx!oriented.action?catalogCode=JYXY_XXGK_BQSM">版权声明</a>
+            |
+            <a href="https://jyxy.mhedu.sh.cn/extranet/web/mhedu/xx!LeavingMessare.action">我要留言</a>
+            |
+            <a target="_blank" href="http://10.107.58.146">旧网链接（内网）</a></div>
+		<div class="copyright">
+            <p>版权所有 上海市闵行区教育学院 （工信部备案号:沪ICP备05012047号）
+                <a target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=31011202005311"
+                   style="text-decoration:none;height:20px;line-height:20px;">
+                    <img src="https://jyxy.mhedu.sh.cn/static/extranet/mhedu/index/images/pilice.png"/>
+                    <span style="height:20px;line-height:20px;color:#fff;">沪公网安备 31011202005311号</span>
+                </a>
+            </p>
+
+            <p>地址：上海市闵行区紫龙路835号 邮编：200241 电话：021-34728865</p>
+
+            <p>本站推荐使用Chrome访问</p>
+        </div>
+	</div>
+</div>
+
+<script  src="https://jyxy.mhedu.sh.cn/static/js/qrcode.min.js"></script>
+<script src="https://jyxy.mhedu.sh.cn/static/js/layer3/layer/layer.js"></script>
+<script>
+
+	var _qrcodeUrl=location.href.split('/extranet')[0]+'/extranet/web/index/index.action';
+
+	var qrcode = new QRCode("footerwxqrcodebtn", {
+	    text: _qrcodeUrl,
+	    width: 56,
+	    height: 56,
+	    colorDark : "#000000",
+	    colorLight : "#ffffff",
+	    correctLevel : QRCode.CorrectLevel.L
+	});
+
+    $("#wxqrcodebtn").click(function(){
+        layer.open({
+            type: 1,
+            title :'移动版扫码进入',
+            skin: 'layui-layer-demo', //样式类名
+            closeBtn: 1, //不显示关闭按钮
+            anim: 2,
+            area :['500px','500px'],
+            shadeClose: true, //开启遮罩关闭
+            content: '<div id="qrcodediv"></div>',
+            success:function(){
+                var qrcode = new QRCode("qrcodediv", {
+                    text: _qrcodeUrl,
+                    width: 360,
+                    height: 360,
+                    colorDark : "#000000",
+                    colorLight : "#ffffff",
+                    correctLevel : QRCode.CorrectLevel.H
+                });
+
+
+            }
+
+
+        });
+    });
+
+    $("#footerwxqrcodebtn").click(function(){
+        layer.open({
+            type: 1,
+            title :'移动版扫码进入',
+            skin: 'layui-layer-demo', //样式类名
+            closeBtn: 1, //不显示关闭按钮
+            anim: 2,
+            area :['500px','500px'],
+            shadeClose: true, //开启遮罩关闭
+            content: '<div id="qrcodediv"></div>',
+            success:function(){
+                var qrcode = new QRCode("qrcodediv", {
+                    text: _qrcodeUrl,
+                    width: 360,
+                    height: 360,
+                    colorDark : "#000000",
+                    colorLight : "#ffffff",
+                    correctLevel : QRCode.CorrectLevel.H
+                });
+
+
+            }
+
+
+        });
+    });
+
+	$("#qyFrcode").click(function(){
+		layer.open({
+			  type: 1,
+			  title :'服务号扫码关注',
+			  skin: 'layui-layer-demo', //样式类名
+			  closeBtn: 1, //不显示关闭按钮
+			  anim: 2,
+			  area :['500px','500px'],
+			  shadeClose: true, //开启遮罩关闭
+			  content: '<div id="qrcodediv"></div>',
+			  success:function(){
+				  $('#qrcodediv').html('<img src="https://jyxy.mhedu.sh.cn/extranet/web/index/'+$('#qyFrcode img').attr('src')+'" style="display:block;;width:360px;height:360px;" />');
+				  
+			  }
+
+		  
+		});
+	});
+
+</script>
+</body>
+<script type="text/javascript">
+    function goBack(){
+    	history.back(-1);
+    }
+    _wxshare({
+        title: '2022学年第二学期闵行区小学音乐第15周教研活动通知',
+        link: location.href,
+        imgUrl: 'http://' + location.host + '/static/school/images/jyxylogo.png',
+        desc: '',
+        ctx: ''
+    });
+
+</script>
+</html>

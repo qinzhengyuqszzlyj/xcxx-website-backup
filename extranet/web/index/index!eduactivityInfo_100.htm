@@ -1,0 +1,348 @@
+
+
+
+
+
+
+
+ 
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+
+
+
+
+
+
+
+ 
+
+
+
+
+
+<meta charset="UTF-8">
+<title>上海市闵行区教育学院</title>
+<link rel="apple-touch-icon-precomposed" sizes="32x32" href="https://jyxyfiles.mhedu.sh.cn/ftpfiles/dcpfiles/mainpicture/ico_jyxy.ico">
+<link rel="shortcut icon" href="https://jyxyfiles.mhedu.sh.cn/ftpfiles/dcpfiles/mainpicture/ico_jyxy.ico">
+<script src="https://jyxy.mhedu.sh.cn/static/vue/jquery-3.6.0.min.js"></script><script type="text/javascript" src="https://jyxy.mhedu.sh.cn/static/vue/jquery-migrate.min.js"></script>
+<script src="https://jyxy.mhedu.sh.cn/static/js/jquery.SuperSlide.js?V1.0"></script>
+<script src="https://jyxy.mhedu.sh.cn/static/js/layer/layer.js"></script>
+<script src="https://jyxy.mhedu.sh.cn/static/js/idealdcp/utils/Utils.js"></script>
+<script type="text/javascript" src="https://jyxy.mhedu.sh.cn/static/js/ueditor/ueditor.parse.js"></script>
+<script type="text/javascript" src="https://jyxy.mhedu.sh.cn/static/js/jquery-qrcode-master/jquery.qrcode.min.js"></script>
+
+
+<link rel="stylesheet" type="text/css" href="https://jyxy.mhedu.sh.cn/static/extranet/mhedu/index/css/style.css">
+<style type="text/css">
+	.tit{
+		padding: 5px 0px;
+	    font-size: 14px;
+	    text-indent: 30px;
+	}
+</style>
+</head>
+<body>
+	
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+<style type="text/css">
+#qrcodediv img{
+    margin: 30px auto;
+}
+</style>   
+
+<div id="header">
+	<div id="topbar">
+		<div class="topbarcon cl" style="">
+			<div class="topsearch"><input id="searchDiv" type="text" placeholder="输入关键字搜索..." class="stxt"><input type="button" value="搜索" class="sbtn"></div>
+			<div class="toprlink">
+				<span class="locat">上海市闵行区紫龙路835号</span>
+				<a href="javascript:;" class="loginlink" id="wxqrcodebtn">移动版</a>
+                <a href="https://jyxy.mhedu.sh.cn/extranet/web/index/index!login.action" target="_blank" class="loginlink">用户登录</a>
+			</div>
+		</div>
+	</div>
+	<div id="top" class="cl">
+        <div id="logo" style="width:235px;"><img src="https://jyxy.mhedu.sh.cn/static/extranet/mhedu/index/images/logo.png" height="66" width="193" alt="">
+        </div>
+		<ul class="menu">
+			<li class="home current"><a target="_blank" href="https://jyxy.mhedu.sh.cn/extranet/web/index/index.action"  >首页</a></li>
+			<li><a target="_blank" class="morelist" code="JYXY_XXGK" href="https://jyxy.mhedu.sh.cn/extranet/web/mhedu/xx.action" >信息公开</a></li>
+			<li><a target="_blank" class="morelist" code="JYXY_DWGK" href="https://jyxy.mhedu.sh.cn/extranet/web/mhedu/dw.action" >党务公开</a></li>
+			<li><a target="_blank" class="morelist" code="JYXY_HXXY" href="https://jyxy.mhedu.sh.cn/extranet/web/mhedu/hx.action" >文明单位</a></li>
+			<li><a target="_blank" class="morelist" code="JYXY_ZHJY" href="https://jyxy.mhedu.sh.cn/extranet/web/mhedu/zh.action" >智慧教育</a></li>
+            
+			<li><a target="_blank" class="morelist" code="JYXY_SY_XYDT" >学院动态</a></li>
+			<li><a target="_blank" class="morelist" code="JYXY_SY_ZHYJ">综合研究</a></li>
+            <li><a target="_blank" class="morelist" code="JYXY_SY_YXDT">教研动态</a></li>
+            <li><a target="_blank" class="morelist" code="JYXY_SY_JSPX">教师培训</a></li>
+            <li><a target="_blank" class="morelist" code="JYXY_SY_GBPX">干部培训</a></li>
+			<li><a target="_blank" class="morelist" code="JYXY_SY_DYYJ">德育研究</a></li>
+			<li><a target="_blank" class="morelist" code="JYXY_XLJK"
+                   href="https://jyxy.mhedu.sh.cn/extranet/web/mhedu/xl.action">心理健康</a></li>
+            <li><a target="_blank" class="morelist" code="JYXY_SY_ZHYJ_JYKY">教育科研</a></li>
+			<li><a target="_blank" class="morelist" code="JYXY_SY_JYJS">教育技术</a></li>
+		</ul>
+	</div>
+</div>
+
+<script>
+	var codes=[];
+	$(".morelist").each(function(){
+		codes.push($(this).attr("code"));
+	});
+	$(".morelist").click(function(){
+        if(!this.href)
+        window.open('/extranet/web/index/index!more.action?catalogCode='+$(this).attr("code"));
+	});
+	$(".sbtn").click(function(){
+        Utils.formBuilder.submitByForm({search:$('#searchDiv').val()}, '/extranet/web/index/index!search.action');
+    });
+
+	$.ajax({
+		url:"/extranet/web/index/index!codes.action",
+		type:'post',
+		data:{codes:codes.join(",")},
+		success:function(data){
+			$(".morelist").each(function(){
+				if(''.indexOf(data.data[$(this).attr("code")])>-1){
+					$("#top .current").removeClass("current");
+					$(this).parent().addClass("current");
+				}
+			});
+
+		},
+		error:function(){
+
+		}
+	});
+</script>
+
+	<div id="combox">
+		<div class="comcon cl">
+			<div class="noticebox">
+				<div class="location">
+					<a href="https://jyxy.mhedu.sh.cn/extranet/web/index/index!list.action" class="home"></a> <em>&gt;</em> <a href="https://jyxy.mhedu.sh.cn/extranet/web/index/index!edunotice.action">通知</a> <em>&gt;</em> 学科教研
+				</div>
+				<div class="article">
+					<h1>2022学年第二学期闵行区初中物理北片教学研讨通知</h1>
+					<div class="artinfo">
+						活动时间: 2023-03-29 13:00<br>
+					</div>
+					<div class="artcon" style="padding:5px 30px;font-size: 13px;color: #7c7676;">
+						<span></span>
+					</div>
+					<p class="tit">对象：初中</p>
+					<p class="tit">地点：七宝三中（宝南路88号）</p>
+					<p class="tit">年级：九年级,八年级</p>
+					<p class="tit">学科：物理</p>
+					<p class="tit">内容：</p>
+					<div class="artcon">
+						<p style="line-height:150%"><strong><span style="font-family: 宋体;line-height: 150%;font-size: 14px">一、活动时间</span></strong><strong><span style="font-family: 宋体;line-height: 150%;font-size: 14px">：</span></strong><span style="font-family: 宋体;line-height: 150%;font-size: 14px">202</span><span style="font-family: 宋体;line-height: 150%;font-size: 14px">3</span><span style="font-family: 宋体;line-height: 150%;font-size: 14px">年</span><span style="font-family: 宋体;line-height: 150%;font-size: 14px">3</span><span style="font-family: 宋体;line-height: 150%;font-size: 14px">月</span><span style="font-family: 宋体;line-height: 150%;font-size: 14px">29</span><span style="font-family: 宋体;line-height: 150%;font-size: 14px"><span style="font-family:宋体">日</span><span style="font-family:宋体">13：</span></span><span style="font-family: 宋体;line-height: 150%;font-size: 14px">00</span></p><p style="line-height:150%"><strong><span style="font-family: 宋体;line-height: 150%;font-size: 14px">二、活动主题：</span></strong><span style="font-family: 宋体;line-height: 150%;font-size: 14px"><span style="font-family:宋体">立足实验教学</span> <span style="font-family:宋体">关注思维发展</span> </span><span style=";font-family:宋体;line-height:150%;font-size:14px">落实课堂评价</span></p><p style="line-height:150%"><strong><span style="font-family: 宋体;line-height: 150%;font-size: 14px">三、活动地点：</span></strong><span style="font-family: 宋体;line-height: 150%;font-size: 14px"><span style="font-family:宋体">七宝三中（宝南路</span><span style="font-family:宋体">8</span></span><span style="font-family: 宋体;line-height: 150%;font-size: 14px">8</span><span style="font-family: 宋体;line-height: 150%;font-size: 14px"><span style="font-family:宋体">号）</span> &nbsp;&nbsp;</span></p><p style="line-height:150%"><strong><span style="font-family: 宋体;line-height: 150%;font-size: 14px">&nbsp; &nbsp;活动主持：</span></strong><span style=";font-family:宋体;line-height:150%;font-size:14px">陶海娟</span><span style=";font-family:宋体;line-height:150%;font-size:14px">&nbsp;</span><span style=";font-family:宋体;line-height:150%;font-size:14px">&nbsp;&nbsp;&nbsp;&nbsp;</span></p><p style="line-height:150%"><strong><span style="font-family: 宋体;line-height: 150%;font-size: 14px">四、</span></strong><strong><span style="font-family: 宋体;line-height: 150%;font-size: 14px">评课负责人：</span></strong><span style="font-family: 宋体;line-height: 150%;font-size: 14px">邵苏萍、徐玲、沈文萍、蒋红枫</span></p><p style="text-indent:28px;line-height:150%"><strong><span style="font-family: 宋体;line-height: 150%;font-size: 14px">签到负责人：</span></strong><span style="font-family: 宋体;line-height: 150%;font-size: 14px">张琪</span><span style=";font-family:宋体;line-height:150%;font-size:14px">、</span><span style=";font-family:宋体;line-height:150%;font-size:14px">王敬</span><strong><span style="font-family: 宋体;line-height: 150%;font-size: 14px">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></strong><span style=";font-family:宋体;line-height:150%;font-size:14px">&nbsp;&nbsp;&nbsp;</span></p><p style="text-indent:28px;line-height:150%"><strong><span style="font-family: 宋体;line-height: 150%;font-size: 14px">引导负责：</span></strong><span style="font-family: 宋体;line-height: 150%;font-size: 14px">七宝</span><span style="font-family: 宋体;line-height: 150%;font-size: 14px">三中老师</span></p><p style="line-height:150%"><strong><span style="font-family: 宋体;line-height: 150%;font-size: 14px">五、活动流程：</span></strong></p><p style="line-height:150%"><span style=";font-family:宋体;line-height:150%;font-size:14px">（一）</span><span style=";font-family:宋体;line-height:150%;font-size:14px">签到分组及抽签安排</span></p><table><tbody><tr class="firstRow"><td width="72" style="padding: 0px 7px; border-width: 1px; border-color: windowtext;"><p style="text-align:center;line-height:150%"><strong><span style="font-family: 宋体;line-height: 150%;font-size: 13px">分组</span></strong></p></td><td width="341" style="padding: 0px 7px; border-width: 1px; border-color: windowtext;"><p style="text-align:center;line-height:150%"><strong><span style="font-family: 宋体;line-height: 150%;font-size: 13px">学校名称</span></strong></p></td><td width="135" style="padding: 0px 7px; border-width: 1px; border-color: windowtext;"><p style="text-align:center;line-height:150%"><strong><span style="font-family: 宋体;line-height: 150%;font-size: 13px">负责人</span></strong></p></td></tr><tr><td width="72" style="padding: 0px 7px; border-left-width: 1px; border-left-color: windowtext; border-right-width: 1px; border-right-color: windowtext; border-top: none; border-bottom-width: 1px; border-bottom-color: windowtext;"><p style="text-align:center;line-height:150%"><span style="font-family:宋体;line-height:150%;font-size:12px">第一组</span></p></td><td width="341" style="padding: 0px 7px; border-left-width: 1px; border-left-color: windowtext; border-right-width: 1px; border-right-color: windowtext; border-top: none; border-bottom-width: 1px; border-bottom-color: windowtext;"><p style="text-align:center;line-height:150%"><span style="font-family:宋体;line-height:150%;font-size:12px">德英乐实验</span><span style="font-family:宋体;line-height:150%;font-size:12px">、</span><span style="font-family:宋体;line-height:150%;font-size:12px">古美学校</span><span style="font-family:宋体;line-height:150%;font-size:12px">、</span><span style="font-family:宋体;line-height:150%;font-size:12px">七宝二中</span><span style="font-family:宋体;line-height:150%;font-size:12px">、</span></p><p style="text-align:center;line-height:150%"><span style="font-family:宋体;line-height:150%;font-size:12px">华漕学校</span><span style="font-family:宋体;line-height:150%;font-size:12px">、</span><span style="font-family:宋体;line-height:150%;font-size:12px">纪王学校</span><span style="font-family:宋体;line-height:150%;font-size:12px">、</span><span style="font-family:宋体;line-height:150%;font-size:12px">金汇实验</span></p></td><td width="135" style="padding: 0px 7px; border-left-width: 1px; border-left-color: windowtext; border-right-width: 1px; border-right-color: windowtext; border-top: none; border-bottom-width: 1px; border-bottom-color: windowtext;"><p style="text-align:center;line-height:150%"><span style="font-family:宋体;line-height:150%;font-size:12px">邵苏萍</span></p></td></tr><tr><td width="72" style="padding: 0px 7px; border-left-width: 1px; border-left-color: windowtext; border-right-width: 1px; border-right-color: windowtext; border-top: none; border-bottom-width: 1px; border-bottom-color: windowtext;"><p style="text-align:center;line-height:150%"><span style="font-family:宋体;line-height:150%;font-size:12px">第二组</span></p></td><td width="341" style="padding: 0px 7px; border-left-width: 1px; border-left-color: windowtext; border-right-width: 1px; border-right-color: windowtext; border-top: none; border-bottom-width: 1px; border-bottom-color: windowtext;"><p style="text-align:center;line-height:150%"><span style="font-family:宋体;line-height:150%;font-size:12px">骏博外校</span><span style="font-family:宋体;line-height:150%;font-size:12px">、</span><span style="font-family:宋体;line-height:150%;font-size:12px">燎原双语</span><span style="font-family:宋体;line-height:150%;font-size:12px">、</span><span style="font-family:宋体;line-height:150%;font-size:12px">龙柏中学</span><span style="font-family:宋体;line-height:150%;font-size:12px">、</span></p><p style="text-align:center;line-height:150%"><span style="font-family:宋体;line-height:150%;font-size:12px">美高双语</span><span style="font-family:宋体;line-height:150%;font-size:12px">、</span><span style="font-family:宋体;line-height:150%;font-size:12px">民办德闳</span><span style="font-family:宋体;line-height:150%;font-size:12px">、</span><span style="font-family:宋体;line-height:150%;font-size:12px">诺达双语</span></p></td><td width="135" style="padding: 0px 7px; border-left-width: 1px; border-left-color: windowtext; border-right-width: 1px; border-right-color: windowtext; border-top: none; border-bottom-width: 1px; border-bottom-color: windowtext;"><p style="text-align:center;line-height:150%"><span style="font-family:宋体;line-height:150%;font-size:12px">徐玲</span></p></td></tr><tr><td width="72" style="padding: 0px 7px; border-left-width: 1px; border-left-color: windowtext; border-right-width: 1px; border-right-color: windowtext; border-top: none; border-bottom-width: 1px; border-bottom-color: windowtext;"><p style="text-align:center;line-height:150%"><span style="font-family:宋体;line-height:150%;font-size:12px">第三组</span></p></td><td width="341" style="padding: 0px 7px; border-left-width: 1px; border-left-color: windowtext; border-right-width: 1px; border-right-color: windowtext; border-top: none; border-bottom-width: 1px; border-bottom-color: windowtext;"><p style="text-align:center;line-height:150%"><span style="font-family:宋体;line-height:150%;font-size:12px">航华中学</span><span style="font-family:宋体;line-height:150%;font-size:12px">、</span><span style="font-family:宋体;line-height:150%;font-size:12px">七宝金都</span><span style="font-family:宋体;line-height:150%;font-size:12px">、</span><span style="font-family:宋体;line-height:150%;font-size:12px">七宝三中</span><span style="font-family:宋体;line-height:150%;font-size:12px">、</span></p><p style="text-align:center;line-height:150%"><span style="font-family:宋体;line-height:150%;font-size:12px">七宝实中</span><span style="font-family:宋体;line-height:150%;font-size:12px">、</span><span style="font-family:宋体;line-height:150%;font-size:12px">七宝文来</span><span style="font-family:宋体;line-height:150%;font-size:12px">、</span><span style="font-family:宋体;line-height:150%;font-size:12px">上宝中学</span></p></td><td width="135" style="padding: 0px 7px; border-left-width: 1px; border-left-color: windowtext; border-right-width: 1px; border-right-color: windowtext; border-top: none; border-bottom-width: 1px; border-bottom-color: windowtext;"><p style="text-align:center;line-height:150%"><span style="font-family:宋体;line-height:150%;font-size:12px">沈文萍</span></p></td></tr><tr><td width="72" style="padding: 0px 7px; border-left-width: 1px; border-left-color: windowtext; border-right-width: 1px; border-right-color: windowtext; border-top: none; border-bottom-width: 1px; border-bottom-color: windowtext;"><p style="text-align:center;line-height:150%"><span style="font-family:宋体;line-height:150%;font-size:12px">第四组</span></p></td><td width="341" style="padding: 0px 7px; border-left-width: 1px; border-left-color: windowtext; border-right-width: 1px; border-right-color: windowtext; border-top: none; border-bottom-width: 1px; border-bottom-color: windowtext;"><p style="text-align:center;line-height:150%"><span style="font-family:宋体;line-height:150%;font-size:12px">上虹中学</span><span style="font-family:宋体;line-height:150%;font-size:12px">、</span><span style="font-family:宋体;line-height:150%;font-size:12px">万科双语</span><span style="font-family:宋体;line-height:150%;font-size:12px">、</span><span style="font-family:宋体;line-height:150%;font-size:12px">文来中学</span></p><p style="text-align:center;line-height:150%"><span style="font-family:宋体;line-height:150%;font-size:12px">文来实验</span><span style="font-family:宋体;line-height:150%;font-size:12px">、</span><span style="font-family:宋体;line-height:150%;font-size:12px">诸翟学校</span></p></td><td width="135" style="padding: 0px 7px; border-left-width: 1px; border-left-color: windowtext; border-right-width: 1px; border-right-color: windowtext; border-top: none; border-bottom-width: 1px; border-bottom-color: windowtext;"><p style="text-align:center;line-height:150%"><span style="font-family:宋体;line-height:150%;font-size:12px">蒋红枫</span></p></td></tr></tbody></table><p style="line-height: 150%"><span style=";font-family:宋体;line-height:150%;font-size:14px">（二）活动</span><span style=";font-family:宋体;line-height:150%;font-size:14px">安排</span></p><p><span style="font-family:宋体;font-size:14px">1、</span><span style=";font-family:宋体;font-size:14px">上课安排</span></p><table width="590" style="width: 363px;"><tbody><tr style="height:22px" class="firstRow"><td width="91" style="padding: 0px 7px; border-width: 1px; border-color: windowtext;"><p style="text-align:center"><span style="font-family: 宋体;font-size: 13px">12:30-12:55</span></p></td><td width="499" colspan="5" style="padding: 0px 7px; border-width: 1px; border-color: windowtext;"><p style=";text-align:center"><span style="font-family: 宋体;font-size: 13px">教师签到</span></p></td></tr><tr><td width="91" style="padding: 0px 7px; border-left-width: 1px; border-left-color: windowtext; border-right-width: 1px; border-right-color: windowtext; border-top: none; border-bottom-width: 1px; border-bottom-color: windowtext;"><p style=";text-align:center"><span style="font-family:宋体;font-size:12px">上课时间</span></p></td><td width="80" style="padding: 0px 7px; border-left-width: 1px; border-left-color: windowtext; border-right-width: 1px; border-right-color: windowtext; border-top: none; border-bottom-width: 1px; border-bottom-color: windowtext;"><p style=";text-align:center"><span style="font-family:宋体;font-size:12px">执教人</span></p></td><td width="73" style="padding: 0px 7px; border-width: 1px; border-color: windowtext;"><p style=";text-align:center"><span style="font-family:宋体;font-size:12px">上课年级</span></p></td><td width="100" style="padding: 0px 7px; border-width: 1px; border-color: windowtext;"><p style=";text-align:center"><span style="font-family:宋体;font-size:12px">上课主题</span></p></td><td width="109" style="padding: 0px 7px; border-width: 1px; border-color: windowtext;"><p style=";text-align:center"><span style="font-family:宋体;font-size:12px">上课地点</span></p></td><td width="136" style="padding: 0px 7px; border-width: 1px; border-color: windowtext;"><p style=";text-align:center"><span style="font-family:宋体;font-size:12px">听课地点</span></p></td></tr><tr><td width="91" style="padding: 0px 7px; border-left-width: 1px; border-left-color: windowtext; border-right-width: 1px; border-right-color: windowtext; border-top: none; border-bottom-width: 1px; border-bottom-color: windowtext;"><p style=";text-align:center"><span style="font-family:宋体;font-size:12px">13：00-13：40</span></p></td><td width="80" style="padding: 0px 7px; border-left-width: 1px; border-left-color: windowtext; border-right-width: 1px; border-right-color: windowtext; border-top: none; border-bottom-width: 1px; border-bottom-color: windowtext;"><p style=";text-align:center"><span style="font-family:宋体;color:rgb(1,1,1);font-size:12px">&nbsp;<span style="font-family:宋体">七宝三中</span></span><span style="font-family:宋体;font-size:12px">&nbsp;</span></p><p style=";text-align:center"><span style="font-family:宋体;font-size:12px">郭梁</span></p></td><td width="73" style="padding: 0px 7px; border-left-width: 1px; border-left-color: windowtext; border-right-width: 1px; border-right-color: windowtext; border-top: none; border-bottom-width: 1px; border-bottom-color: windowtext;"><p style=";text-align:center"><span style="font-family:宋体;font-size:12px">八年级</span></p></td><td width="100" style="padding: 0px 7px; border-left-width: 1px; border-left-color: windowtext; border-right-width: 1px; border-right-color: windowtext; border-top: none; border-bottom-width: 1px; border-bottom-color: windowtext;"><p style=";text-align:center"><span style="font-family:宋体;font-size:12px">机械能</span></p></td><td width="109" rowspan="2" style="padding: 0px 7px; border-left-width: 1px; border-left-color: windowtext; border-right-width: 1px; border-right-color: windowtext; border-top: none; border-bottom-width: 1px; border-bottom-color: windowtext;"><p style=";text-align:center"><span style="font-family:宋体;font-size:12px">远程教室</span><span style="font-family:宋体;font-size:12px">223</span></p></td><td width="136" rowspan="2" style="padding: 0px 7px; border-left-width: 1px; border-left-color: windowtext; border-right-width: 1px; border-right-color: windowtext; border-top: none; border-bottom-width: 1px; border-bottom-color: windowtext;"><p style=";text-align:center"><span style="font-family:宋体;font-size:12px">&nbsp;</span></p><p style=";text-align:center"><span style="font-family:宋体;font-size:12px">远程教室</span><span style="font-family:宋体;font-size:12px">223</span></p><p style="text-indent:14px;text-align:center"><span style="font-family:宋体;font-size:12px">&nbsp;</span></p></td></tr><tr style="height:63px"><td width="91" style="padding: 0px 7px; border-left-width: 1px; border-left-color: windowtext; border-right-width: 1px; border-right-color: windowtext; border-top: none; border-bottom-width: 1px; border-bottom-color: windowtext;"><p style=";text-align:center"><span style="font-family:宋体;font-size:12px">13</span><span style="font-family:宋体;font-size:12px">：</span><span style="font-family:宋体;font-size:12px">5</span><span style="font-family:宋体;font-size:12px">0-14：</span><span style="font-family:宋体;font-size:12px">3</span><span style="font-family:宋体;font-size:12px">0</span></p></td><td width="80" style="padding: 0px 7px; border-left-width: 1px; border-left-color: windowtext; border-right-width: 1px; border-right-color: windowtext; border-top: none; border-bottom-width: 1px; border-bottom-color: windowtext;"><p style="text-indent:12px;background:rgb(255,255,255)"><span style="font-family:宋体;color:rgb(1,1,1);font-size:12px">上闵外</span></p><p style=";text-align:center;background:rgb(255,255,255)"><span style="font-family:宋体;font-size:12px">明梦</span></p><p style=";text-align:center"><span style="font-family:宋体;font-size:12px">&nbsp;</span></p></td><td width="73" style="padding: 0px 7px; border-left-width: 1px; border-left-color: windowtext; border-right-width: 1px; border-right-color: windowtext; border-top: none; border-bottom-width: 1px; border-bottom-color: windowtext;"><p style=";text-align:center"><span style="font-family:宋体;font-size:12px">九年级</span></p></td><td width="100" style="padding: 0px 7px; border-left-width: 1px; border-left-color: windowtext; border-right-width: 1px; border-right-color: windowtext; border-top: none; border-bottom-width: 1px; border-bottom-color: windowtext;"><p style=";text-align:center"><span style="font-family:宋体;font-size:12px">电学单元复习</span></p></td></tr></tbody></table><p style="line-height: 150%"><span style=";font-family:宋体;line-height:150%;font-size:14px">2</span><span style=";font-family:宋体;line-height:150%;font-size:14px">、</span><span style=";font-family:宋体;line-height:150%;font-size:14px"><span style="font-family:宋体">研讨安排（</span>1</span><span style=";font-family:宋体;line-height:150%;font-size:14px">4</span><span style=";font-family:宋体;line-height:150%;font-size:14px">:</span><span style=";font-family:宋体;line-height:150%;font-size:14px">45</span><span style=";font-family:宋体;line-height:150%;font-size:14px">——1</span><span style=";font-family:宋体;line-height:150%;font-size:14px">5</span><span style=";font-family:宋体;line-height:150%;font-size:14px">:</span><span style=";font-family:宋体;line-height:150%;font-size:14px">4</span><span style=";font-family:宋体;line-height:150%;font-size:14px">5</span><span style=";font-family:宋体;line-height:150%;font-size:14px">）</span></p><p style="line-height: 150%"><span style=";font-family:宋体;line-height:150%;font-size:14px"><span style="font-family:宋体">（</span>1）研讨地点：</span><span style=";font-family:宋体;line-height:150%;font-size:14px">多功能厅</span></p><p style="line-height: 150%"><span style=";font-family:宋体;line-height:150%;font-size:14px"><span style="font-family:宋体">（</span>2）研讨流程</span></p><p style="margin-left:24px;line-height:150%"><span style="font-family: 宋体;font-size: 14px">①&nbsp;</span><span style="font-family: 宋体;font-size: 14px">研讨安排</span><span style="font-family: 宋体;font-size: 14px">：</span><span style=";font-family:宋体;font-size:14px"><span style="font-family:宋体">各学校按分组坐在相应的位置，由</span><span style="font-family:宋体">4位负责人安排每组进行20分钟研讨</span></span><span style=";font-family:宋体;font-size:14px">；</span></p><p style="margin-left:24px;line-height:150%"><span style="font-family:宋体;font-size:14px">②&nbsp;</span><span style=";font-family:宋体;font-size:14px"><span style="font-family:宋体">说课安排：执教教师分别进行说课，每人限定</span><span style="font-family:宋体">5分钟，时间到立即暂停；</span></span></p><p style="margin-left:24px;line-height:150%"><span style="font-family:宋体;font-size:14px">③&nbsp;</span><span style=";font-family:宋体;font-size:14px">评课安排：</span></p><p style="line-height:150%"><strong><span style="font-family: 宋体;line-height: 150%;font-size: 14px"><span style="font-family:宋体">环节一：随机评课</span><span style="font-family:宋体">——</span></span></strong><span style=";font-family:宋体;line-height:150%;font-size:14px">讨论结束后由学科指导团</span><strong><span style="font-family: 宋体;line-height: 150%;font-size: 14px">邵苏萍</span></strong><strong><span style="font-family: 宋体;line-height: 150%;font-size: 14px">和</span></strong><strong><span style="font-family: 宋体;line-height: 150%;font-size: 14px">徐玲</span></strong><span style=";font-family:宋体;line-height:150%;font-size:14px">老师分别随机抽取两所学校，抽中的学校要各派一名代表参与评课，每人限定</span><span style=";font-family:宋体;line-height:150%;font-size:14px">8</span><span style=";font-family:宋体;line-height:150%;font-size:14px">分钟，时间到立即暂停；</span></p><p style="line-height:150%"><strong><span style="font-family: 宋体;line-height: 150%;font-size: 14px"><span style="font-family:宋体">环节二：指定评课</span><span style="font-family:宋体">——</span></span></strong><span style=";font-family:宋体;line-height:150%;font-size:14px">七宝三中</span><span style=";font-family:宋体;line-height:150%;font-size:14px">&nbsp;<span style="font-family:宋体">杜莉</span></span><span style=";font-family:宋体;line-height:150%;font-size:14px">&nbsp;</span><span style=";font-family:宋体;line-height:150%;font-size:14px">老师评课，</span><span style=";font-family:宋体;line-height:150%;font-size:14px">主题《立足实验教学</span><span style=";font-family:宋体;line-height:150%;font-size:14px">&nbsp;<span style="font-family:宋体">培养科学思维</span></span><span style=";font-family:宋体;line-height:150%;font-size:14px">》</span><span style=";font-family:宋体;line-height:150%;font-size:14px"><span style="font-family:宋体">限定</span><span style="font-family:宋体">8分钟，时间到立即暂停。 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></span></p><p style="line-height:150%"><span style=";font-family:宋体;font-size:14px">3、</span><span style=";font-family:宋体;font-size:14px"><span style="font-family:宋体">主题发言：</span><span style="font-family:宋体">1</span></span><span style=";font-family:宋体;font-size:14px">5</span><span style=";font-family:宋体;font-size:14px">:4</span><span style=";font-family:宋体;font-size:14px">5---16</span><span style=";font-family:宋体;font-size:14px">:1</span><span style=";font-family:宋体;font-size:14px">0</span></p><p style="line-height:150%"><span style=";font-family:宋体;line-height:150%;font-size:14px">七宝三中</span><span style=";font-family:宋体;line-height:150%;font-size:14px">&nbsp;<span style="font-family:宋体">沈文萍老师</span> <span style="font-family:宋体">主题《驱动教学改进的长程探索</span><span style="font-family:宋体">——校本作业的开发与优化》</span></span><span style=";font-family:宋体;line-height:150%;font-size:14px">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></p><p style="line-height:150%"><strong><span style="font-family: 宋体;line-height: 150%;font-size: 14px">六、教研活动流程</span></strong></p><p style="line-height:150%"><span style=";font-family:宋体;line-height:150%;font-size:14px">1</span><span style=";font-family:宋体;line-height:150%;font-size:14px">、</span><span style="font-family: 宋体;line-height: 150%;font-size: 14px">12:30-12:55</span><span style=";font-family:宋体;line-height:150%;font-size:14px">：签到</span><span style=";font-family:宋体;line-height:150%;font-size:14px">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></p><p style="line-height:150%"><span style=";font-family:宋体;line-height:150%;font-size:14px">2</span><span style=";font-family:宋体;line-height:150%;font-size:14px">、</span><span style=";font-family:宋体;line-height:150%;font-size:14px">13：00-14：30</span><span style=";font-family:宋体;line-height:150%;font-size:14px">：听课活动</span></p><p style="line-height:150%"><span style=";font-family:宋体;line-height:150%;font-size:14px">3</span><span style=";font-family:宋体;line-height:150%;font-size:14px">、</span><span style=";font-family:宋体;line-height:150%;font-size:14px">1</span><span style=";font-family:宋体;line-height:150%;font-size:14px">4</span><span style=";font-family:宋体;line-height:150%;font-size:14px">:</span><span style=";font-family:宋体;line-height:150%;font-size:14px">45</span><span style=";font-family:宋体;line-height:150%;font-size:14px">——1</span><span style=";font-family:宋体;line-height:150%;font-size:14px">5</span><span style=";font-family:宋体;line-height:150%;font-size:14px">:</span><span style=";font-family:宋体;line-height:150%;font-size:14px">4</span><span style=";font-family:宋体;line-height:150%;font-size:14px">5</span><span style=";font-family:宋体;line-height:150%;font-size:14px">：研讨活</span><span style=";font-family:宋体;line-height:150%;font-size:14px">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;</span></p><p style="line-height:150%"><span style=";font-family:宋体;line-height:150%;font-size:14px">4</span><span style=";font-family:宋体;line-height:150%;font-size:14px">、</span><span style=";font-family:宋体;line-height:150%;font-size:14px">1</span><span style=";font-family:宋体;line-height:150%;font-size:14px">5</span><span style=";font-family:宋体;line-height:150%;font-size:14px">:4</span><span style=";font-family:宋体;line-height:150%;font-size:14px">5---16</span><span style=";font-family:宋体;line-height:150%;font-size:14px">:1</span><span style=";font-family:宋体;line-height:150%;font-size:14px">0</span><span style=";font-family:宋体;line-height:150%;font-size:14px">：主题发言</span></p><p style="line-height:150%"><span style=";font-family:宋体;line-height:150%;font-size:14px">5、16:10-16:20：</span><span style=";font-family:宋体;line-height:150%;font-size:14px">主持人告知其他事项，活动结束</span></p><p><br></p>
+					</div>
+					<p class="tit" >出席与附言：参与对象：北片初中物理全体教师<p>
+                    
+                    <p class="tit" >备注：学校地址、公交及地图（详细内容见附件）
+</p>
+                    
+					
+						<div class="filebox" style="padding-top:15px;">
+							<h6>附件：（点击下载）</h6>
+							
+								<p><a href="https://jyxyfiles.mhedu.sh.cn/ftpfiles/dcpfiles/8a9c1a005cce76e5015cd2e970790651/app/XYTZ/allArea/main/2023/03/ff80808180a667930182b4e509c11db3/b782bca431d04749afae3e19461cf785.docx?title=2022%E5%AD%A6%E5%B9%B4%E7%AC%AC%E4%BA%8C%E5%AD%A6%E6%9C%9F%E9%97%B5%E8%A1%8C%E5%8C%BA%E5%88%9D%E4%B8%AD%E7%89%A9%E7%90%86%E5%8C%97%E7%89%87%E6%95%99%E5%AD%A6%E7%A0%94%E8%AE%A8%E9%80%9A%E7%9F%A5%EF%BC%883%E6%9C%8829%E6%97%A5%EF%BC%89.docx" download="2022学年第二学期闵行区初中物理北片教学研讨通知（3月29日）.docx">1、<span style="color: #359bd7;">2022学年第二学期闵行区初中物理北片教学研讨通知（3月29日）.docx</span></a></p>
+							
+							
+						</div>
+					
+					
+					<div class="artpre" style="padding-top:15px;">
+						<span class="goback"><a href="javascript:history.back(-1);">返回列表</a></span>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+<div id="footer">
+	<div class="ft cl">
+		<div  class="blogo">
+            <span id="_ideConac" class="" style="margin-top: 5px;">
+            <a href="http://bszs.conac.cn/sitename?method=show&amp;id=2907016072AE5269E053012819ACF339" target="_blank">
+                <img id="imgConac" vspace="0" hspace="0" border="0" src="https://jyxyfiles.mhedu.sh.cn/ftpfiles/dcpfiles/image/blue.png"
+                     data-bd-imgshare-binded="1">
+            </a>
+        </span>
+        </div>
+        <div  class="blogo">
+            <div style="padding: 3px;background-color: white;width: 56px;margin: auto;">
+                <span class="" id="footerwxqrcodebtn" ></span>
+            </div>
+            <span>移动版二维码</span>
+        </div>
+        <div  class="blogo">
+            <div class="" id="qyFrcode" style="margin-right:10px;display: block;">
+                <img src="https://jyxyfiles.mhedu.sh.cn/ftpfiles/dcpfiles/introduction/2205021687154906a1763079ccc40a84.jpg" style="width: 61px;height: 62px;">
+            </div>
+            <span>闵行区教育学院服务号</span>
+        </div>
+
+        <div class="bnav">
+            <a href="https://jyxy.mhedu.sh.cn/extranet/web/mhedu/xx!oriented.action?catalogCode=JYXY_XXGK_LXWM">联系我们</a>
+            |
+            <a href="https://jyxy.mhedu.sh.cn/extranet/web/mhedu/xx!oriented.action?catalogCode=JYXY_XXGK_BQSM">版权声明</a>
+            |
+            <a href="https://jyxy.mhedu.sh.cn/extranet/web/mhedu/xx!LeavingMessare.action">我要留言</a>
+            |
+            <a target="_blank" href="http://10.107.58.146">旧网链接（内网）</a></div>
+		<div class="copyright">
+            <p>版权所有 上海市闵行区教育学院 （工信部备案号:沪ICP备05012047号）
+                <a target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=31011202005311"
+                   style="text-decoration:none;height:20px;line-height:20px;">
+                    <img src="https://jyxy.mhedu.sh.cn/static/extranet/mhedu/index/images/pilice.png"/>
+                    <span style="height:20px;line-height:20px;color:#fff;">沪公网安备 31011202005311号</span>
+                </a>
+            </p>
+
+            <p>地址：上海市闵行区紫龙路835号 邮编：200241 电话：021-34728865</p>
+
+            <p>本站推荐使用Chrome访问</p>
+        </div>
+	</div>
+</div>
+
+<script  src="https://jyxy.mhedu.sh.cn/static/js/qrcode.min.js"></script>
+<script src="https://jyxy.mhedu.sh.cn/static/js/layer3/layer/layer.js"></script>
+<script>
+
+	var _qrcodeUrl=location.href.split('/extranet')[0]+'/extranet/web/index/index.action';
+
+	var qrcode = new QRCode("footerwxqrcodebtn", {
+	    text: _qrcodeUrl,
+	    width: 56,
+	    height: 56,
+	    colorDark : "#000000",
+	    colorLight : "#ffffff",
+	    correctLevel : QRCode.CorrectLevel.L
+	});
+
+    $("#wxqrcodebtn").click(function(){
+        layer.open({
+            type: 1,
+            title :'移动版扫码进入',
+            skin: 'layui-layer-demo', //样式类名
+            closeBtn: 1, //不显示关闭按钮
+            anim: 2,
+            area :['500px','500px'],
+            shadeClose: true, //开启遮罩关闭
+            content: '<div id="qrcodediv"></div>',
+            success:function(){
+                var qrcode = new QRCode("qrcodediv", {
+                    text: _qrcodeUrl,
+                    width: 360,
+                    height: 360,
+                    colorDark : "#000000",
+                    colorLight : "#ffffff",
+                    correctLevel : QRCode.CorrectLevel.H
+                });
+
+
+            }
+
+
+        });
+    });
+
+    $("#footerwxqrcodebtn").click(function(){
+        layer.open({
+            type: 1,
+            title :'移动版扫码进入',
+            skin: 'layui-layer-demo', //样式类名
+            closeBtn: 1, //不显示关闭按钮
+            anim: 2,
+            area :['500px','500px'],
+            shadeClose: true, //开启遮罩关闭
+            content: '<div id="qrcodediv"></div>',
+            success:function(){
+                var qrcode = new QRCode("qrcodediv", {
+                    text: _qrcodeUrl,
+                    width: 360,
+                    height: 360,
+                    colorDark : "#000000",
+                    colorLight : "#ffffff",
+                    correctLevel : QRCode.CorrectLevel.H
+                });
+
+
+            }
+
+
+        });
+    });
+
+	$("#qyFrcode").click(function(){
+		layer.open({
+			  type: 1,
+			  title :'服务号扫码关注',
+			  skin: 'layui-layer-demo', //样式类名
+			  closeBtn: 1, //不显示关闭按钮
+			  anim: 2,
+			  area :['500px','500px'],
+			  shadeClose: true, //开启遮罩关闭
+			  content: '<div id="qrcodediv"></div>',
+			  success:function(){
+				  $('#qrcodediv').html('<img src="https://jyxy.mhedu.sh.cn/extranet/web/index/'+$('#qyFrcode img').attr('src')+'" style="display:block;;width:360px;height:360px;" />');
+				  
+			  }
+
+		  
+		});
+	});
+
+</script>
+</body>
+<script type="text/javascript">
+    function goBack(){
+    	history.back(-1);
+    }
+    _wxshare({
+        title: '2022学年第二学期闵行区初中物理北片教学研讨通知',
+        link: location.href,
+        imgUrl: 'http://' + location.host + '/static/school/images/jyxylogo.png',
+        desc: '',
+        ctx: ''
+    });
+
+</script>
+</html>

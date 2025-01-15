@@ -1,0 +1,344 @@
+
+
+
+
+
+
+
+ 
+
+
+
+
+
+<!doctype html>
+<html>
+<head>
+
+
+
+
+
+
+
+ 
+
+
+
+
+
+<meta charset="UTF-8">
+<title>上海市闵行区教育学院</title>
+<link rel="apple-touch-icon-precomposed" sizes="32x32" href="https://jyxyfiles.mhedu.sh.cn/ftpfiles/dcpfiles/mainpicture/ico_jyxy.ico">
+<link rel="shortcut icon" href="https://jyxyfiles.mhedu.sh.cn/ftpfiles/dcpfiles/mainpicture/ico_jyxy.ico">
+<script src="https://jyxy.mhedu.sh.cn/static/vue/jquery-3.6.0.min.js"></script><script type="text/javascript" src="https://jyxy.mhedu.sh.cn/static/vue/jquery-migrate.min.js"></script>
+<script src="https://jyxy.mhedu.sh.cn/static/js/jquery.SuperSlide.js?V1.0"></script>
+<script src="https://jyxy.mhedu.sh.cn/static/js/layer/layer.js"></script>
+<script src="https://jyxy.mhedu.sh.cn/static/js/idealdcp/utils/Utils.js"></script>
+<script type="text/javascript" src="https://jyxy.mhedu.sh.cn/static/js/ueditor/ueditor.parse.js"></script>
+<script type="text/javascript" src="https://jyxy.mhedu.sh.cn/static/js/jquery-qrcode-master/jquery.qrcode.min.js"></script>
+
+<link rel="stylesheet" type="text/css" href="https://jyxy.mhedu.sh.cn/static/extranet/mhedu/index/css/style.css">
+<style type="text/css">
+	.tit{
+		padding: 5px 0px;
+	    font-size: 14px;
+	    text-indent: 30px;
+	}
+</style>
+</head>
+<body>
+	
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+<style type="text/css">
+#qrcodediv img{
+    margin: 30px auto;
+}
+</style>   
+
+<div id="header">
+	<div id="topbar">
+		<div class="topbarcon cl" style="">
+			<div class="topsearch"><input id="searchDiv" type="text" placeholder="输入关键字搜索..." class="stxt"><input type="button" value="搜索" class="sbtn"></div>
+			<div class="toprlink">
+				<span class="locat">上海市闵行区紫龙路835号</span>
+				<a href="javascript:;" class="loginlink" id="wxqrcodebtn">移动版</a>
+                <a href="https://jyxy.mhedu.sh.cn/extranet/web/index/index!login.action" target="_blank" class="loginlink">用户登录</a>
+			</div>
+		</div>
+	</div>
+	<div id="top" class="cl">
+        <div id="logo" style="width:235px;"><img src="https://jyxy.mhedu.sh.cn/static/extranet/mhedu/index/images/logo.png" height="66" width="193" alt="">
+        </div>
+		<ul class="menu">
+			<li class="home current"><a target="_blank" href="https://jyxy.mhedu.sh.cn/extranet/web/index/index.action"  >首页</a></li>
+			<li><a target="_blank" class="morelist" code="JYXY_XXGK" href="https://jyxy.mhedu.sh.cn/extranet/web/mhedu/xx.action" >信息公开</a></li>
+			<li><a target="_blank" class="morelist" code="JYXY_DWGK" href="https://jyxy.mhedu.sh.cn/extranet/web/mhedu/dw.action" >党务公开</a></li>
+			<li><a target="_blank" class="morelist" code="JYXY_HXXY" href="https://jyxy.mhedu.sh.cn/extranet/web/mhedu/hx.action" >文明单位</a></li>
+			<li><a target="_blank" class="morelist" code="JYXY_ZHJY" href="https://jyxy.mhedu.sh.cn/extranet/web/mhedu/zh.action" >智慧教育</a></li>
+            
+			<li><a target="_blank" class="morelist" code="JYXY_SY_XYDT" >学院动态</a></li>
+			<li><a target="_blank" class="morelist" code="JYXY_SY_ZHYJ">综合研究</a></li>
+            <li><a target="_blank" class="morelist" code="JYXY_SY_YXDT">教研动态</a></li>
+            <li><a target="_blank" class="morelist" code="JYXY_SY_JSPX">教师培训</a></li>
+            <li><a target="_blank" class="morelist" code="JYXY_SY_GBPX">干部培训</a></li>
+			<li><a target="_blank" class="morelist" code="JYXY_SY_DYYJ">德育研究</a></li>
+			<li><a target="_blank" class="morelist" code="JYXY_XLJK"
+                   href="https://jyxy.mhedu.sh.cn/extranet/web/mhedu/xl.action">心理健康</a></li>
+            <li><a target="_blank" class="morelist" code="JYXY_SY_ZHYJ_JYKY">教育科研</a></li>
+			<li><a target="_blank" class="morelist" code="JYXY_SY_JYJS">教育技术</a></li>
+		</ul>
+	</div>
+</div>
+
+<script>
+	var codes=[];
+	$(".morelist").each(function(){
+		codes.push($(this).attr("code"));
+	});
+	$(".morelist").click(function(){
+        if(!this.href)
+        window.open('/extranet/web/index/index!more.action?catalogCode='+$(this).attr("code"));
+	});
+	$(".sbtn").click(function(){
+        Utils.formBuilder.submitByForm({search:$('#searchDiv').val()}, '/extranet/web/index/index!search.action');
+    });
+
+	$.ajax({
+		url:"/extranet/web/index/index!codes.action",
+		type:'post',
+		data:{codes:codes.join(",")},
+		success:function(data){
+			$(".morelist").each(function(){
+				if(''.indexOf(data.data[$(this).attr("code")])>-1){
+					$("#top .current").removeClass("current");
+					$(this).parent().addClass("current");
+				}
+			});
+
+		},
+		error:function(){
+
+		}
+	});
+</script>
+
+	<div id="combox">
+		<div class="comcon cl">
+			<div class="noticebox">
+				<div class="location">
+					<a href="https://jyxy.mhedu.sh.cn/extranet/web/index/index!list.action" class="home"></a> <em>&gt;</em> <a href="https://jyxy.mhedu.sh.cn/extranet/web/index/index!edunotice.action">通知</a> <em>&gt;</em> 学科教研
+				</div>
+				<div class="article">
+					<h1>第9周初中生命科学线上线下混合教研活动</h1>
+					<div class="artinfo">
+						活动时间: 2022-10-26 13:00<br>
+					</div>
+					<div class="artcon" style="padding:5px 30px;font-size: 13px;color: #7c7676;">
+						<span></span>
+					</div>
+					<p class="tit">对象：初中</p>
+					<p class="tit">地点：1.初中北片教师（线下）：上海骏博外国语学校（上海市闵行区华翔路3260号）南三楼录播教室一； 2.初中南片、中片和浦东片教师（线上）：腾讯会议（会议号和密码届时发微信群）【有变动则详见微信群通知】</p>
+					<p class="tit">年级：初中</p>
+					<p class="tit">学科：生命科学</p>
+					<p class="tit">内容：</p>
+					<div class="artcon">
+						<p>活动主题：精心设计探究活动，有效提升核心素养</p><p>活动主持：上海市闵行区华漕学校 &nbsp;莫晓连</p><p>活动内容：</p><p>活动内容：</p><p>1.听课和评课13:10-14:00</p><p>执教教师：上海骏博外国语学校 田忠慧</p><p>执教课题：染色体与人体性别决定&nbsp;</p><p style="margin-bottom:15px;text-align:left;text-indent:30px;background:white"><span style=";font-family:'Tahoma',sans-serif;color:#010101"></span></p><table><tbody><tr class="firstRow"><td width="105" style="border-width: 1px; border-right-style: solid; border-bottom-style: solid; border-color: windowtext; border-image: initial; padding: 0px; word-break: break-all;"><p><span style="font-size: 14px;">时间安排</span></p></td><td width="115" style="border-width: 1px; border-color: windowtext; border-right-style: solid; border-bottom-style: solid; border-image: initial; padding: 0px 7px;"><p><span style="font-size: 14px;">初中北片教师</span></p><p><span style="font-size: 14px;">（线下参与）</span></p></td><td width="213" style="border-width: 1px; border-color: windowtext; border-right-style: solid; border-bottom-style: solid; border-image: initial; padding: 0px 7px;"><p><span style="font-size: 14px;">初中南片、中片和浦东片教师</span></p><p><span style="font-size: 14px;">（建议4-5人一小组线上参与）</span></p></td></tr><tr><td width="125" style="border-width: 1px; border-right-style: solid; border-color: windowtext; border-bottom-style: solid; border-image: initial; padding: 0px;"><p><span style="font-size: 14px;">听课13:10-13:50</span></p></td><td width="110" style="border-width: 1px; border-color: windowtext; border-bottom-style: solid; border-right-style: solid; padding: 0px 7px;"><p><span style="font-size: 14px;">集体听现场线下课</span></p></td><td width="215" style="border-width: 1px; border-color: windowtext; border-bottom-style: solid; border-right-style: solid; padding: 0px 7px;"><p><span style="font-size: 14px;">4-5人一小组云<span style="font-size: 14px; font-variant-ligatures: normal; font-variant-caps: normal; orphans: 2; text-align: start; widows: 2; -webkit-text-stroke-width: 0px; float: none; word-spacing: 0px;">录播听线上录制课</span></span></p></td></tr><tr><td width="125" style="border-width: 1px; border-right-style: solid; border-color: windowtext; border-bottom-style: solid; border-image: initial; padding: 0px;"><p><span style="font-size: 14px;">评课13:50-14:00</span></p></td><td width="351" colspan="2" style="border-width: 1px; border-color: windowtext; border-bottom-style: solid; border-right-style: solid; padding: 0px 7px;"><p><span style="font-size: 14px;">云录播线上教师个人评课</span></p></td></tr></tbody></table><p>2. 小组内线下听课评课交流和讨论14:00-14:15<br></p><p>3. 小组间线上线下混合研讨和交流 14:15–</p><p>&nbsp; &nbsp;（1）执教教师说课</p><p>&nbsp; &nbsp;（2）单元教学设计分享展示</p><p>&nbsp; &nbsp;（3）教研组展示</p><p>&nbsp; &nbsp;（4）基于主题的区级教学研讨</p><p>&nbsp; &nbsp;（5）主持人学习和研究分享交流</p><p><br></p>
+					</div>
+					<p class="tit" >出席与附言：参加人员：请闵行区全体初中生命科学学教师准时出席。 附言： 1.特殊情况不能出席者，通过群里发的二维码扫码填写提交。 2.请注意活动时间，并随身带好教师进修编号用于签到。<p>
+                    
+					
+						<div class="filebox" style="padding-top:15px;">
+							<h6>附件：（点击下载）</h6>
+							
+								<p><a href="https://jyxyfiles.mhedu.sh.cn/ftpfiles/dcpfiles/8a9c1a005cce76e5015cd2e970790651/app/XYTZ/allArea/main/2022/10/8a9c1a006116662901611c6f4fd9074c/bcd4bb7e9127468c991d2d722fe0b52f.png?title=2022%E5%AD%A6%E5%B9%B4%E7%AC%AC1%E5%AD%A6%E6%9C%9F++%E8%AF%B7%E5%81%87%E4%BF%A1%E6%81%AF%E5%A1%AB%E5%86%99%E4%BA%8C%E7%BB%B4%E7%A0%81%E6%B5%B7%E6%8A%A5.png" download="2022学年第1学期  请假信息填写二维码海报.png">1、<span style="color: #359bd7;">2022学年第1学期  请假信息填写二维码海报.png</span></a></p>
+							
+							
+						</div>
+					
+					
+					<div class="artpre" style="padding-top:15px;">
+						<span class="goback"><a href="javascript:history.back(-1);">返回列表</a></span>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+<div id="footer">
+	<div class="ft cl">
+		<div  class="blogo">
+            <span id="_ideConac" class="" style="margin-top: 5px;">
+            <a href="http://bszs.conac.cn/sitename?method=show&amp;id=2907016072AE5269E053012819ACF339" target="_blank">
+                <img id="imgConac" vspace="0" hspace="0" border="0" src="https://jyxyfiles.mhedu.sh.cn/ftpfiles/dcpfiles/image/blue.png"
+                     data-bd-imgshare-binded="1">
+            </a>
+        </span>
+        </div>
+        <div  class="blogo">
+            <div style="padding: 3px;background-color: white;width: 56px;margin: auto;">
+                <span class="" id="footerwxqrcodebtn" ></span>
+            </div>
+            <span>移动版二维码</span>
+        </div>
+        <div  class="blogo">
+            <div class="" id="qyFrcode" style="margin-right:10px;display: block;">
+                <img src="https://jyxyfiles.mhedu.sh.cn/ftpfiles/dcpfiles/introduction/2205021687154906a1763079ccc40a84.jpg" style="width: 61px;height: 62px;">
+            </div>
+            <span>闵行区教育学院服务号</span>
+        </div>
+
+        <div class="bnav">
+            <a href="https://jyxy.mhedu.sh.cn/extranet/web/mhedu/xx!oriented.action?catalogCode=JYXY_XXGK_LXWM">联系我们</a>
+            |
+            <a href="https://jyxy.mhedu.sh.cn/extranet/web/mhedu/xx!oriented.action?catalogCode=JYXY_XXGK_BQSM">版权声明</a>
+            |
+            <a href="https://jyxy.mhedu.sh.cn/extranet/web/mhedu/xx!LeavingMessare.action">我要留言</a>
+            |
+            <a target="_blank" href="http://10.107.58.146">旧网链接（内网）</a></div>
+		<div class="copyright">
+            <p>版权所有 上海市闵行区教育学院 （工信部备案号:沪ICP备05012047号）
+                <a target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=31011202005311"
+                   style="text-decoration:none;height:20px;line-height:20px;">
+                    <img src="https://jyxy.mhedu.sh.cn/static/extranet/mhedu/index/images/pilice.png"/>
+                    <span style="height:20px;line-height:20px;color:#fff;">沪公网安备 31011202005311号</span>
+                </a>
+            </p>
+
+            <p>地址：上海市闵行区紫龙路835号 邮编：200241 电话：021-34728865</p>
+
+            <p>本站推荐使用Chrome访问</p>
+        </div>
+	</div>
+</div>
+
+<script  src="https://jyxy.mhedu.sh.cn/static/js/qrcode.min.js"></script>
+<script src="https://jyxy.mhedu.sh.cn/static/js/layer3/layer/layer.js"></script>
+<script>
+
+	var _qrcodeUrl=location.href.split('/extranet')[0]+'/extranet/web/index/index.action';
+
+	var qrcode = new QRCode("footerwxqrcodebtn", {
+	    text: _qrcodeUrl,
+	    width: 56,
+	    height: 56,
+	    colorDark : "#000000",
+	    colorLight : "#ffffff",
+	    correctLevel : QRCode.CorrectLevel.L
+	});
+
+    $("#wxqrcodebtn").click(function(){
+        layer.open({
+            type: 1,
+            title :'移动版扫码进入',
+            skin: 'layui-layer-demo', //样式类名
+            closeBtn: 1, //不显示关闭按钮
+            anim: 2,
+            area :['500px','500px'],
+            shadeClose: true, //开启遮罩关闭
+            content: '<div id="qrcodediv"></div>',
+            success:function(){
+                var qrcode = new QRCode("qrcodediv", {
+                    text: _qrcodeUrl,
+                    width: 360,
+                    height: 360,
+                    colorDark : "#000000",
+                    colorLight : "#ffffff",
+                    correctLevel : QRCode.CorrectLevel.H
+                });
+
+
+            }
+
+
+        });
+    });
+
+    $("#footerwxqrcodebtn").click(function(){
+        layer.open({
+            type: 1,
+            title :'移动版扫码进入',
+            skin: 'layui-layer-demo', //样式类名
+            closeBtn: 1, //不显示关闭按钮
+            anim: 2,
+            area :['500px','500px'],
+            shadeClose: true, //开启遮罩关闭
+            content: '<div id="qrcodediv"></div>',
+            success:function(){
+                var qrcode = new QRCode("qrcodediv", {
+                    text: _qrcodeUrl,
+                    width: 360,
+                    height: 360,
+                    colorDark : "#000000",
+                    colorLight : "#ffffff",
+                    correctLevel : QRCode.CorrectLevel.H
+                });
+
+
+            }
+
+
+        });
+    });
+
+	$("#qyFrcode").click(function(){
+		layer.open({
+			  type: 1,
+			  title :'服务号扫码关注',
+			  skin: 'layui-layer-demo', //样式类名
+			  closeBtn: 1, //不显示关闭按钮
+			  anim: 2,
+			  area :['500px','500px'],
+			  shadeClose: true, //开启遮罩关闭
+			  content: '<div id="qrcodediv"></div>',
+			  success:function(){
+				  $('#qrcodediv').html('<img src="https://jyxy.mhedu.sh.cn/extranet/web/index/'+$('#qyFrcode img').attr('src')+'" style="display:block;;width:360px;height:360px;" />');
+				  
+			  }
+
+		  
+		});
+	});
+
+</script>
+</body>
+<script type="text/javascript">
+    function goBack(){
+    	history.back(-1);
+    }
+    _wxshare({
+        title: '第9周初中生命科学线上线下混合教研活动',
+        link: location.href,
+        imgUrl: 'http://' + location.host + '/static/school/images/jyxylogo.png',
+        desc: '',
+        ctx: ''
+    });
+
+</script>
+</html>
